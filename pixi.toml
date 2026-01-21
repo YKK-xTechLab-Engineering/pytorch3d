@@ -1,0 +1,137 @@
+[workspace]
+name = "pytorch3d"
+version = "0.7.9"
+# conda-forge first for most packages, pytorch channel for pytorch/torchvision
+channels = ["conda-forge", "pytorch", "nvidia"]
+platforms = ["linux-64"]
+
+[system-requirements]
+cuda = "12.6"
+libc = { family = "glibc", version = "2.28" }
+
+# =============================================================================
+# Core Dependencies
+# =============================================================================
+[dependencies]
+# Python
+python = ">=3.10,<3.13"
+
+# PyTorch from pytorch channel with CUDA support
+pytorch = { version = ">=2.0", channel = "pytorch" }
+torchvision = { version = ">=0.15", channel = "pytorch" }
+pytorch-cuda = { version = "12.4.*", channel = "pytorch" }
+
+# CUDA toolkit and development libraries from nvidia channel
+cuda-toolkit = { version = ">=12.4", channel = "nvidia" }
+cuda-nvcc = { version = ">=12.4", channel = "nvidia" }
+
+# Build tools - using GCC 13 for better pybind11 compatibility
+gxx = "13.*"
+gcc = "13.*"
+ninja = "*"
+cmake = "*"
+
+# Core runtime dependencies
+numpy = ">=1.20"
+pillow = "*"
+
+# =============================================================================
+# PyPI Dependencies (for packages not available on conda)
+# =============================================================================
+[pypi-dependencies]
+iopath = ">=0.1.9"
+fvcore = ">=0.1.5"
+
+# =============================================================================
+# Optional Feature: Development Tools
+# =============================================================================
+[feature.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+flake8 = "*"
+black = "*"
+isort = "*"
+
+[feature.dev.pypi-dependencies]
+usort = "*"
+
+# =============================================================================
+# Optional Feature: Visualization & Notebooks
+# =============================================================================
+[feature.viz.dependencies]
+matplotlib = "*"
+ipywidgets = "*"
+jupyter = "*"
+imageio = "*"
+
+[feature.viz.pypi-dependencies]
+tqdm = ">4.29.0"
+
+# =============================================================================
+# Optional Feature: Implicitron (Neural Radiance Fields)
+# =============================================================================
+[feature.implicitron.dependencies]
+hydra-core = ">=1.1"
+
+[feature.implicitron.pypi-dependencies]
+visdom = "*"
+lpips = "*"
+accelerate = "*"
+sqlalchemy = ">=2.0"
+
+# =============================================================================
+# Optional Feature: Documentation
+# =============================================================================
+[feature.docs.dependencies]
+sphinx = ">=4.0"
+sphinx_rtd_theme = "*"
+
+[feature.docs.pypi-dependencies]
+recommonmark = "*"
+sphinx-markdown-tables = "*"
+
+# =============================================================================
+# Environments
+# =============================================================================
+[environments]
+default = { features = ["dev", "viz"], solve-group = "main" }
+minimal = { features = [], solve-group = "main" }
+full = { features = ["dev", "viz", "implicitron"], solve-group = "main" }
+docs = { features = ["docs"], solve-group = "main" }
+
+# =============================================================================
+# Activation Scripts & Environment Variables
+# =============================================================================
+[activation]
+env = { FORCE_CUDA = "1", MAX_JOBS = "8", CUDA_HOME = "$CONDA_PREFIX", CUDA_PATH = "$CONDA_PREFIX" }
+scripts = ["scripts/activate.sh"]
+
+# =============================================================================
+# Tasks
+# =============================================================================
+[tasks]
+# Installation tasks
+install = { cmd = "pip install -e . --no-build-isolation", description = "Install pytorch3d in editable mode" }
+install-clean = { cmd = "pip install -e . --no-build-isolation --force-reinstall", description = "Clean reinstall pytorch3d" }
+
+# Build tasks
+build = { cmd = "python setup.py build_ext --inplace", description = "Build C++/CUDA extensions in-place" }
+build-verbose = { cmd = "python setup.py build_ext --inplace 2>&1 | tee build.log", description = "Build with verbose output" }
+clean = { cmd = "python setup.py clean --all && rm -rf build/ dist/ *.egg-info/", description = "Clean build artifacts" }
+
+# Testing tasks
+test = { cmd = "pytest tests/ -v", description = "Run all tests" }
+test-quick = { cmd = "pytest tests/ -v -x --ignore=tests/benchmarks", description = "Quick test run" }
+test-gpu = { cmd = "pytest tests/ -v -k 'cuda'", description = "Run GPU-specific tests" }
+
+# Development tasks
+lint = { cmd = "flake8 pytorch3d/", description = "Run linter" }
+format = { cmd = "black pytorch3d/ tests/", description = "Format code with black" }
+
+# Utility tasks
+check-cuda = { cmd = "python -c \"import torch; print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CUDA version: {torch.version.cuda}'); print(f'Device count: {torch.cuda.device_count()}')\"", description = "Check CUDA availability" }
+check-install = { cmd = "python -c \"import pytorch3d; print(f'pytorch3d version: {pytorch3d.__version__}'); from pytorch3d import _C; print('C++ extensions loaded successfully')\"", description = "Verify pytorch3d installation" }
+info = { cmd = "pixi info && python -c \"import torch; print(f'\\nPyTorch: {torch.__version__}'); print(f'CUDA: {torch.version.cuda}')\"", description = "Show environment info" }
+
+# Documentation tasks
+docs-build = { cmd = "cd docs && make html", description = "Build documentation" }
