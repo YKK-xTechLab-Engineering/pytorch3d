@@ -35,12 +35,16 @@ cmake = "*"
 numpy = ">=1.20"
 pillow = "*"
 
+[pypi-options]
+no-build-isolation = ["pytorch3d", "point2mesh"]
+
 # =============================================================================
 # PyPI Dependencies (for packages not available on conda)
 # =============================================================================
 [pypi-dependencies]
 iopath = ">=0.1.9"
 fvcore = ">=0.1.5"
+pytorch3d = { path = ".", editable = true }
 point2mesh = { path = "pkgs/point2mesh", editable = true }
 
 # =============================================================================

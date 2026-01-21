@@ -446,6 +446,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/b1/29/21001afea86bac5016c3940b43de3ce4786b0d8337d4ea79bb903c649ce3/trailrunner-1.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/39/58/1cb7ace637ca87642aaf6543d699dea701e5686787b5b32c9e1f0f686ec0/usort-1.1.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/38/4f/fe9a4d472aa867878ce3bb7efb16654c5d63672b86dc0e6e953a67018433/yacs-0.1.8-py3-none-any.whl
+      - pypi: ./
       - pypi: ./pkgs/point2mesh
   docs:
     channels:
@@ -751,6 +752,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/33/d1/8bb87d21e9aeb323cc03034f5eaf2c8f69841e40e4853c2627edf8111ed3/termcolor-3.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/38/4f/fe9a4d472aa867878ce3bb7efb16654c5d63672b86dc0e6e953a67018433/yacs-0.1.8-py3-none-any.whl
+      - pypi: ./
       - pypi: ./pkgs/point2mesh
   full:
     channels:
@@ -1204,7 +1206,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/a0/60/429e9b1cb3fc651937727befe258ea24122d9663e4d5709a48c9cbfceecb/safetensors-0.7.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d1/fe/66d73b76d378ba8cc2fe605920c0c75092e3a65ae746e1e767d9d020a75a/scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/0a/93/3be94d96bb442d0d9a60e55a6bb6e0958dd3457751c6f8502e56ef95fed0/sqlalchemy-2.0.45-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/06/aa/9ce0f3e7a9829ead5c8ce549392f33a12c4555a6c0609bb27d882e9c7ddf/sqlalchemy-2.0.46.tar.gz
       - pypi: https://files.pythonhosted.org/packages/65/de/5fcc806280950b9535d3892c7f1f3477efc4c2f8624ae6c0b2c3baf9a339/stdlibs-2025.10.28-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/40/44/4a5f08c96eb108af5cb50b41f76142f0afa346dfa99d5296fe7202a11854/tabulate-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/33/d1/8bb87d21e9aeb323cc03034f5eaf2c8f69841e40e4853c2627edf8111ed3/termcolor-3.3.0-py3-none-any.whl
@@ -1214,6 +1216,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/39/58/1cb7ace637ca87642aaf6543d699dea701e5686787b5b32c9e1f0f686ec0/usort-1.1.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/31/ab/6a8df57477ea6bb65b828f0b6725255982dfcd02f7ed353b895393616875/visdom-0.2.4.tar.gz
       - pypi: https://files.pythonhosted.org/packages/38/4f/fe9a4d472aa867878ce3bb7efb16654c5d63672b86dc0e6e953a67018433/yacs-0.1.8-py3-none-any.whl
+      - pypi: ./
       - pypi: ./pkgs/point2mesh
   minimal:
     channels:
@@ -1495,6 +1498,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/33/d1/8bb87d21e9aeb323cc03034f5eaf2c8f69841e40e4853c2627edf8111ed3/termcolor-3.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/38/4f/fe9a4d472aa867878ce3bb7efb16654c5d63672b86dc0e6e953a67018433/yacs-0.1.8-py3-none-any.whl
+      - pypi: ./
       - pypi: ./pkgs/point2mesh
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-7_kmp_llvm.conda
@@ -6482,6 +6486,26 @@ packages:
   purls: []
   size: 2906
   timestamp: 1628062930777
+- pypi: ./
+  name: pytorch3d
+  version: 0.7.9
+  sha256: 31b296530e37944eb83e01136fdaa82d980b7628a69b0cb6e9b2ea311f120ee7
+  requires_dist:
+  - iopath
+  - matplotlib ; extra == 'all'
+  - tqdm>4.29.0 ; extra == 'all'
+  - imageio ; extra == 'all'
+  - ipywidgets ; extra == 'all'
+  - flake8 ; extra == 'dev'
+  - usort ; extra == 'dev'
+  - hydra-core>=1.1 ; extra == 'implicitron'
+  - visdom ; extra == 'implicitron'
+  - lpips ; extra == 'implicitron'
+  - tqdm>4.29.0 ; extra == 'implicitron'
+  - matplotlib ; extra == 'implicitron'
+  - accelerate ; extra == 'implicitron'
+  - sqlalchemy>=2.0 ; extra == 'implicitron'
+  editable: true
 - conda: https://conda.anaconda.org/conda-forge/noarch/pytz-2025.2-pyhd8ed1ab_0.conda
   sha256: 8d2a8bf110cc1fc3df6904091dead158ba3e614d8402a83e51ed3a8aa93cdeb0
   md5: bc8e3267d44011051f2eb14d22fb0960
@@ -7019,10 +7043,10 @@ packages:
   - pkg:pypi/sphinxcontrib-serializinghtml?source=hash-mapping
   size: 28669
   timestamp: 1733750596111
-- pypi: https://files.pythonhosted.org/packages/0a/93/3be94d96bb442d0d9a60e55a6bb6e0958dd3457751c6f8502e56ef95fed0/sqlalchemy-2.0.45-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
+- pypi: https://files.pythonhosted.org/packages/06/aa/9ce0f3e7a9829ead5c8ce549392f33a12c4555a6c0609bb27d882e9c7ddf/sqlalchemy-2.0.46.tar.gz
   name: sqlalchemy
-  version: 2.0.45
-  sha256: ba547ac0b361ab4f1608afbc8432db669bd0819b3e12e29fb5fa9529a8bba81d
+  version: 2.0.46
+  sha256: cf36851ee7219c170bb0793dbc3da3e80c582e04a5437bc601bfe8c85c9216d7
   requires_dist:
   - importlib-metadata ; python_full_version < '3.8'
   - greenlet>=1 ; platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64'
