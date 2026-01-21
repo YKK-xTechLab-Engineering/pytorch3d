@@ -4,6 +4,7 @@ version = "0.7.9"
 # conda-forge first for most packages, pytorch channel for pytorch/torchvision
 channels = ["conda-forge", "pytorch", "nvidia"]
 platforms = ["linux-64"]
+preview = ["pixi-build"]
 
 [system-requirements]
 cuda = "12.6"
@@ -30,10 +31,17 @@ gxx = "13.*"
 gcc = "13.*"
 ninja = "*"
 cmake = "*"
+trimesh = "*"
+fvcore = "*"
+hatchling = "*"
 
 # Core runtime dependencies
 numpy = ">=1.20"
 pillow = "*"
+scipy = "*"
+
+# Manifold mesh processing tools (built from source)
+manifold = { path = "pkgs/point2mesh/manifold_src" }
 
 [pypi-options]
 no-build-isolation = ["pytorch3d", "point2mesh"]
@@ -42,6 +50,7 @@ no-build-isolation = ["pytorch3d", "point2mesh"]
 # PyPI Dependencies (for packages not available on conda)
 # =============================================================================
 [pypi-dependencies]
+
 iopath = ">=0.1.9"
 fvcore = ">=0.1.5"
 pytorch3d = { path = ".", editable = true }
