@@ -41,6 +41,7 @@ pillow = "*"
 [pypi-dependencies]
 iopath = ">=0.1.9"
 fvcore = ">=0.1.5"
+point2mesh = { path = "pkgs/point2mesh", editable = true }
 
 # =============================================================================
 # Optional Feature: Development Tools
